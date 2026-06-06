@@ -13,12 +13,7 @@
   .logo-row{display:flex;flex-direction:column;gap:3px}
   .logo{font-family:'DM Serif Display',serif;font-size:22px;color:var(--accent)}
   .logo span{color:var(--text2);font-size:13px;font-family:'DM Sans',sans-serif;font-weight:300;margin-left:10px}
-  #syncStatus{font-size:11px;font-family:'DM Mono',monospace;color:var(--text3);display:flex;align-items:center;gap:6px;margin-top:3px}
-  #syncStatus .dot{width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0;transition:background .3s}
-  #syncStatus.online .dot{background:var(--credit);box-shadow:0 0 6px rgba(78,202,139,.6)}
-  #syncStatus.syncing .dot{background:var(--accent);animation:pulse .8s infinite}
-  #syncStatus.error .dot{background:var(--debit)}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .save-hint{font-size:11px;color:var(--text3);margin-top:2px}
   .header-actions{display:flex;gap:10px}
   .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--r);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;border:none;transition:all .2s}
   .btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border)}
@@ -29,27 +24,27 @@
   .btn-danger:hover{background:rgba(232,98,90,.1);border-color:var(--debit)}
   .btn-export{background:transparent;color:var(--credit);border:1px solid rgba(78,202,139,.3)}
   .btn-export:hover{background:rgba(78,202,139,.1);border-color:var(--credit)}
-  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .btn-save{background:var(--accent);color:#0f0f13;font-weight:700}
+  .btn-save:hover{background:var(--accent2)}
   main{max-width:1280px;margin:0 auto;padding:24px 28px}
   .filters-bar{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px 22px;margin-bottom:22px}
   .filter-group{display:flex;flex-direction:column;gap:5px}
-  .filter-group label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);font-weight:500}
+  .filter-group label,.form-group label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);font-weight:500}
   select,input[type=text],input[type=number],input[type=date]{background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:8px 12px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;transition:border-color .2s;min-width:120px}
   select:focus,input:focus{border-color:var(--accent)}
   select option{background:var(--surface2)}
   .summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
   .summary-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px 20px}
-  .summary-card .label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:8px}
-  .summary-card .value{font-family:'DM Mono',monospace;font-size:22px;font-weight:500}
-  .summary-card.opening .value{color:var(--accent)}
-  .summary-card.credits .value{color:var(--credit)}
-  .summary-card.debits .value{color:var(--debit)}
+  .summary-card .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:8px}
+  .summary-card .val{font-family:'DM Mono',monospace;font-size:22px;font-weight:500}
+  .summary-card.opening .val{color:var(--accent)}
+  .summary-card.credits .val{color:var(--credit)}
+  .summary-card.debits .val{color:var(--debit)}
   .summary-card .sub{font-size:11px;color:var(--text3);margin-top:4px}
   .add-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;margin-bottom:22px}
   .add-panel h3{font-size:13px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px}
   .add-form{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
   .form-group{display:flex;flex-direction:column;gap:5px}
-  .form-group label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);font-weight:500}
   .type-toggle{display:flex;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
   .type-btn{padding:8px 18px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;border:none;background:var(--surface2);color:var(--text2);transition:all .2s;flex:1}
   .type-btn.active-credit{background:rgba(78,202,139,.15);color:var(--credit)}
@@ -74,15 +69,14 @@
   .badge-debit{background:rgba(232,98,90,.15);color:var(--debit)}
   .del-btn{background:none;border:none;cursor:pointer;color:var(--text3);padding:4px 8px;border-radius:6px;font-size:15px;transition:all .15s}
   .del-btn:hover{color:var(--debit);background:rgba(232,98,90,.12)}
-  .state-box{text-align:center;padding:52px 20px;color:var(--text3)}
-  .state-box .icon{font-size:36px;margin-bottom:12px;opacity:.5}
-  .spinner{width:28px;height:28px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px}
-  @keyframes spin{to{transform:rotate(360deg)}}
+  .empty-state{text-align:center;padding:52px 20px;color:var(--text3)}
+  .empty-state .icon{font-size:36px;margin-bottom:12px;opacity:.5}
   .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;align-items:center;justify-content:center}
   .modal-overlay.show{display:flex}
-  .modal{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px;max-width:380px;width:90%;box-shadow:0 24px 80px rgba(0,0,0,.4)}
+  .modal{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px;max-width:420px;width:90%;box-shadow:0 24px 80px rgba(0,0,0,.4)}
   .modal h3{font-family:'DM Serif Display',serif;font-size:20px;margin-bottom:10px}
-  .modal p{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:22px}
+  .modal p{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:16px}
+
   .modal-actions{display:flex;gap:10px;justify-content:flex-end}
   #toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--surface3);border:1px solid var(--border);color:var(--text);font-size:13px;padding:10px 22px;border-radius:30px;z-index:300;transition:transform .3s ease;pointer-events:none;white-space:nowrap}
   #toast.show{transform:translateX(-50%) translateY(0)}
@@ -93,14 +87,15 @@
 </style>
 </head>
 <body>
+
 <header>
   <div class="logo-row">
     <div class="logo">Khata Book <span>Family Expense Tracker</span></div>
-    <div id="syncStatus"><span class="dot"></span><span id="syncText">Loading…</span></div>
+    <div class="save-hint" id="saveHint">💾 Click "Save Page" after adding entries — downloads updated file to upload to GitHub</div>
   </div>
   <div class="header-actions">
-    <button class="btn btn-ghost" id="refreshBtn">⟳ Refresh</button>
-    <button class="btn btn-export" id="exportBtn">⬇ Export</button>
+    <button class="btn btn-save" id="savePageBtn">💾 Save Page</button>
+    <button class="btn btn-export" id="exportBtn">⬇ Export Excel</button>
     <button class="btn btn-danger" id="wipeBtn">↺ Wipe All</button>
   </div>
 </header>
@@ -128,23 +123,23 @@
 
   <div class="summary-grid">
     <div class="summary-card opening">
-      <div class="label">Opening Balance</div>
-      <div class="value" id="summaryOpening">₹ 0.00</div>
+      <div class="lbl">Opening Balance</div>
+      <div class="val" id="summaryOpening">₹ 0.00</div>
       <div class="sub" id="summaryOpeningNote">Start of period</div>
     </div>
     <div class="summary-card credits">
-      <div class="label">Total Credits</div>
-      <div class="value" id="summaryCredits">₹ 0.00</div>
+      <div class="lbl">Total Credits</div>
+      <div class="val" id="summaryCredits">₹ 0.00</div>
       <div class="sub" id="creditCount">0 entries</div>
     </div>
     <div class="summary-card debits">
-      <div class="label">Total Debits</div>
-      <div class="value" id="summaryDebits">₹ 0.00</div>
+      <div class="lbl">Total Debits</div>
+      <div class="val" id="summaryDebits">₹ 0.00</div>
       <div class="sub" id="debitCount">0 entries</div>
     </div>
     <div class="summary-card closing">
-      <div class="label">Closing Balance</div>
-      <div class="value" id="summaryClosing">₹ 0.00</div>
+      <div class="lbl">Closing Balance</div>
+      <div class="val" id="summaryClosing">₹ 0.00</div>
       <div class="sub" id="summaryClosingNote">End of period</div>
     </div>
   </div>
@@ -176,7 +171,7 @@
   <div class="table-wrap">
     <div class="table-header">
       <h3>📋 Transactions</h3>
-      <span class="entry-count" id="entryCount">—</span>
+      <span class="entry-count" id="entryCount">0 records</span>
     </div>
     <div style="overflow-x:auto">
       <table>
@@ -187,16 +182,15 @@
         <tbody id="ledgerBody"></tbody>
       </table>
     </div>
-    <div id="loadingState" class="state-box"><div class="spinner"></div><p>Fetching data…</p></div>
-    <div id="emptyState" class="state-box" style="display:none"><div class="icon">📒</div><p>No entries yet. Add your first transaction above.</p></div>
-    <div id="errorState" class="state-box" style="display:none"><div class="icon">⚠️</div><p id="errorMsg">Could not connect.</p></div>
+    <div id="emptyState" class="empty-state"><div class="icon">📒</div><p>No entries yet. Add your first transaction above.</p></div>
   </div>
 </main>
 
+<!-- WIPE MODAL -->
 <div class="modal-overlay" id="wipeModal">
   <div class="modal">
     <h3>Wipe All Data?</h3>
-    <p>This permanently deletes all entries from the Google Sheet. You can recover via Google Sheets version history.</p>
+    <p>This will delete all entries from memory. Make sure you have exported or saved the page first.</p>
     <div class="modal-actions">
       <button class="btn btn-ghost" id="wipeCancelBtn">Cancel</button>
       <button class="btn btn-danger" id="wipeConfirmBtn">Yes, Wipe All</button>
@@ -204,6 +198,7 @@
   </div>
 </div>
 
+<!-- DELETE MODAL -->
 <div class="modal-overlay" id="deleteModal">
   <div class="modal">
     <h3>Delete Entry?</h3>
@@ -217,227 +212,67 @@
 
 <div id="toast"></div>
 
-<script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzMPu2I8QTGioScq0Hb4EOJ87JdcT3w_5DBDfuVQWrUXGHdl5cEzegqdeLkEt8EmpqRHg/exec";
-const TOKEN      = "IESSOfficer@1029";
-const MONTHS     = ['','January','February','March','April','May','June','July','August','September','October','November','December'];
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     DATA STORE — entries are saved here as JSON between sessions
+     DO NOT edit this manually
+     ═══════════════════════════════════════════════════════════════════════ -->
+<script id="dataStore" type="application/json">[]</script>
 
-let entries      = [];
-let entryType    = 'credit';
+<script>
+const MONTHS = ['','January','February','March','April','May','June','July','August','September','October','November','December'];
+let entries = [];
+let entryType = 'credit';
 let deleteTarget = null;
 
 const $ = id => document.getElementById(id);
 
+// ── INIT ────────────────────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  try {
+    const stored = $('dataStore').textContent.trim();
+    if (stored && stored !== '[]') entries = JSON.parse(stored);
+  } catch(e) { entries = []; }
+  $('entryDate').value = today();
+  populateYearFilter();
+  renderAll();
+});
+
+// ── HELPERS ─────────────────────────────────────────────────────────────────
 function today(){ return new Date().toISOString().slice(0,10); }
-
-function fmt(n){
-  return '₹ ' + Number(n).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});
-}
-
-function normaliseDate(val){
-  if(!val) return '';
-  const s = String(val);
-  if(s.includes('T')){
-    const d = new Date(s);
-    return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-  }
-  return s.slice(0,10);
-}
-
-function fmtDate(d){
-  if(!d) return '';
-  const [y,m,dd] = d.split('-');
-  return dd+' '+MONTHS[parseInt(m)].slice(0,3)+' '+y;
-}
-
+function fmt(n){ return '₹ '+Number(n).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function fmtDate(d){ if(!d) return ''; const [y,m,dd]=d.split('-'); return dd+' '+MONTHS[parseInt(m)].slice(0,3)+' '+y; }
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-function setSync(state,text){ $('syncStatus').className=state; $('syncText').textContent=text; }
-
-let _toastTimer;
-function showToast(msg){ const t=$('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(_toastTimer); _toastTimer=setTimeout(()=>t.classList.remove('show'),2400); }
-
+let _tt;
+function showToast(msg){ const t=$('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2400); }
 function closeModal(){ document.querySelectorAll('.modal-overlay').forEach(m=>m.classList.remove('show')); }
 
-// ── JSONP (works on all browsers, no CORS issues) ───────────────────────────
-function jsonpOnce(params, timeout){
-  return new Promise((resolve,reject)=>{
-    const cb = '_kb_'+Date.now()+'_'+Math.floor(Math.random()*99999);
-    const script = document.createElement('script');
-    const timer = setTimeout(()=>{ cleanup(); reject(new Error('timed_out')); }, timeout||30000);
-
-    window[cb] = json => { cleanup(); json.status==='ok' ? resolve(json) : reject(new Error(json.message||'Error')); };
-
-    function cleanup(){ clearTimeout(timer); delete window[cb]; script.parentNode&&script.parentNode.removeChild(script); }
-
-    script.onerror = ()=>{ cleanup(); reject(new Error('script_error')); };
-
-    const p = new URLSearchParams({...params, token:TOKEN, callback:cb, t:Date.now()});
-    script.src = SCRIPT_URL+'?'+p.toString();
-    document.head.appendChild(script);
-  });
+// ── TYPE TOGGLE ──────────────────────────────────────────────────────────────
+function setType(t){
+  entryType=t;
+  $('btnCredit').className='type-btn'+(t==='credit'?' active-credit':'');
+  $('btnDebit').className='type-btn'+(t==='debit'?' active-debit':'');
 }
 
-// Retry up to 3 times with increasing timeouts
-async function jsonp(params){
-  const timeouts = [15000, 25000, 40000];
-  let lastErr;
-  for(let i=0; i<timeouts.length; i++){
-    try{
-      if(i>0){
-        setSync('syncing', 'Retrying ('+(i+1)+'/3)…');
-        await new Promise(r=>setTimeout(r,1500));
-      }
-      return await jsonpOnce(params, timeouts[i]);
-    } catch(err){
-      lastErr = err;
-      console.warn('JSONP attempt '+(i+1)+' failed:', err.message);
-    }
-  }
-  throw new Error('Failed after 3 attempts — Apps Script may be slow or URL needs redeployment');
-}
-
-// ── LOAD ────────────────────────────────────────────────────────────────────
-async function loadData(){
-  $('loadingState').style.display='block';
-  $('emptyState').style.display='none';
-  $('errorState').style.display='none';
-  $('ledgerBody').innerHTML='';
-  setSync('syncing','Fetching…');
-  try{
-    const res = await jsonp({});
-    entries = res.data
-      .filter(r=>r.id)
-      .map(r=>({
-        id:       String(r.id),
-        date:     normaliseDate(r.date),
-        user:     String(r.user),
-        type:     String(r.type),
-        amount:   parseFloat(r.amount)||0,
-        desc:     String(r.desc),
-        createdAt:r.createdAt
-      }))
-      .sort((a,b)=>a.date.localeCompare(b.date)||Number(a.createdAt)-Number(b.createdAt));
-    $('loadingState').style.display='none';
-    $('errorState').style.display='none';
-    setSync('online','Synced · '+entries.length+' entr'+(entries.length===1?'y':'ies'));
-    populateYearFilter();
-    renderAll();
-  } catch(err){
-    $('loadingState').style.display='none';
-    // If we already have data, keep showing it and just warn in the status bar
-    if(entries.length>0){
-      setSync('error','Refresh failed — showing cached data');
-      showToast('Could not refresh — tap ⟳ to retry');
-      renderAll(); // re-render existing data
-    } else {
-      $('errorState').style.display='block';
-      $('errorMsg').textContent='Error: '+err.message;
-      setSync('error','Failed to load');
-    }
-    console.error(err);
-  }
-}
-
-// ── YEAR FILTER ─────────────────────────────────────────────────────────────
-function populateYearFilter(){
-  const sel=$('filterYear'), cur=sel.value;
-  const years=[...new Set(entries.map(e=>e.date.slice(0,4)))].sort().reverse();
-  while(sel.options.length>1) sel.remove(1);
-  years.forEach(y=>{ const o=document.createElement('option'); o.value=y; o.textContent=y; sel.appendChild(o); });
-  if(cur) sel.value=cur;
-}
-
-// ── FILTERS ─────────────────────────────────────────────────────────────────
-function getFilters(){ return{year:$('filterYear').value, month:$('filterMonth').value, user:$('filterUser').value}; }
-
-function clearFilters(){ $('filterYear').value=''; $('filterMonth').value=''; $('filterUser').value=''; renderAll(); }
-
-function filteredEntries(){
-  const f=getFilters();
-  return entries.filter(e=>{
-    const [y,m]=e.date.split('-');
-    if(f.year&&y!==f.year) return false;
-    if(f.month&&parseInt(m)!==parseInt(f.month)) return false;
-    if(f.user&&e.user!==f.user) return false;
-    return true;
-  });
-}
-
-function getOpeningBalance(){
-  const f=getFilters();
-  if(!f.year&&!f.month) return 0;
-  return entries.reduce((acc,e)=>{
-    const [y,m]=e.date.split('-');
-    let before=false;
-    if(f.year&&f.month) before=(y+'-'+m)<(f.year+'-'+String(f.month).padStart(2,'0'));
-    else if(f.year) before=y<f.year;
-    if(before) return acc+(e.type==='credit'?e.amount:-e.amount);
-    return acc;
-  },0);
-}
-
-// ── RENDER ──────────────────────────────────────────────────────────────────
-function renderAll(){ renderTable(); renderSummary(); }
-
-function renderTable(){
-  const rows=filteredEntries(), body=$('ledgerBody'), empty=$('emptyState');
-  $('entryCount').textContent=rows.length+' record'+(rows.length!==1?'s':'');
-  if(rows.length===0){ body.innerHTML=''; empty.style.display='block'; return; }
-  empty.style.display='none';
-  let running=getOpeningBalance();
-  body.innerHTML=rows.map((e,i)=>{
-    running+=e.type==='credit'?e.amount:-e.amount;
-    return '<tr>'+
-      '<td class="mono" style="color:var(--text3)">'+(i+1)+'</td>'+
-      '<td class="mono">'+fmtDate(e.date)+'</td>'+
-      '<td class="user">'+esc(e.user)+'</td>'+
-      '<td style="max-width:260px">'+esc(e.desc)+'</td>'+
-      '<td><span class="badge '+(e.type==='credit'?'badge-credit':'badge-debit')+'">'+e.type+'</span></td>'+
-      '<td class="amount '+e.type+'">'+(e.type==='credit'?'+':'-')+' '+fmt(e.amount)+'</td>'+
-      '<td style="text-align:right;font-family:\'DM Mono\',monospace;font-size:12px;color:'+(running>=0?'var(--text2)':'var(--debit)')+'">'+fmt(running)+'</td>'+
-      '<td><button class="del-btn" data-id="'+esc(e.id)+'" title="Delete">✕</button></td>'+
-      '</tr>';
-  }).join('');
-}
-
-function renderSummary(){
-  const rows=filteredEntries(), opening=getOpeningBalance();
-  const credits=rows.filter(e=>e.type==='credit').reduce((s,e)=>s+e.amount,0);
-  const debits=rows.filter(e=>e.type==='debit').reduce((s,e)=>s+e.amount,0);
-  const f=getFilters();
-  const label=f.month&&f.year?MONTHS[parseInt(f.month)]+' '+f.year:f.year?f.year:f.month?MONTHS[parseInt(f.month)]:'All Time';
-  $('summaryOpening').textContent=fmt(opening);
-  $('summaryOpeningNote').textContent='Before '+label;
-  $('summaryCredits').textContent=fmt(credits);
-  $('creditCount').textContent=rows.filter(e=>e.type==='credit').length+' credit entries';
-  $('summaryDebits').textContent=fmt(debits);
-  $('debitCount').textContent=rows.filter(e=>e.type==='debit').length+' debit entries';
-  $('summaryClosing').textContent=fmt(opening+credits-debits);
-  $('summaryClosingNote').textContent='End of '+label;
-}
-
-// ── ADD ─────────────────────────────────────────────────────────────────────
-async function addEntry(){
+// ── ADD ENTRY ────────────────────────────────────────────────────────────────
+function addEntry(){
   const date=$('entryDate').value, user=$('entryUser').value;
   const amount=parseFloat($('entryAmount').value), desc=$('entryDesc').value.trim();
   if(!date){showToast('Please select a date');return;}
   if(!user){showToast('Please select a user');return;}
   if(!amount||amount<=0){showToast('Enter a valid amount');return;}
   if(!desc){showToast('Please add a description');return;}
-  const btn=$('addBtn'); btn.disabled=true; btn.textContent='Saving…';
-  setSync('syncing','Saving…');
-  try{
-    await jsonp({payload:JSON.stringify({action:'add',id:Date.now().toString(),date,user,type:entryType,amount,desc,createdAt:Date.now()})});
-    $('entryAmount').value=''; $('entryDesc').value=''; $('entryDate').value=today();
-    showToast('Entry saved ✓');
-    await new Promise(r=>setTimeout(r,2000));
-    await loadData();
-  } catch(err){ showToast('Error: '+err.message); setSync('error','Save failed'); console.error(err); }
-  finally{ btn.disabled=false; btn.textContent='Add Entry'; }
+
+  entries.push({ id:Date.now(), date, user, type:entryType, amount, desc, createdAt:Date.now() });
+  entries.sort((a,b)=>a.date.localeCompare(b.date)||a.createdAt-b.createdAt);
+
+  $('entryAmount').value=''; $('entryDesc').value=''; $('entryDate').value=today();
+  populateYearFilter();
+  renderAll();
+  showToast('Entry added ✓ — click 💾 Save Page to keep it');
 }
 
-// ── DELETE ──────────────────────────────────────────────────────────────────
+// ── DELETE ───────────────────────────────────────────────────────────────────
 function showDeleteModal(id){
   deleteTarget=id;
   const e=entries.find(x=>x.id===id); if(!e) return;
@@ -445,21 +280,81 @@ function showDeleteModal(id){
   $('deleteModal').classList.add('show');
 }
 
-async function confirmDelete(){
-  closeModal(); setSync('syncing','Deleting…');
-  try{ await jsonp({payload:JSON.stringify({action:'delete',id:deleteTarget})}); showToast('Entry deleted'); await new Promise(r=>setTimeout(r,2000)); await loadData(); }
-  catch(err){ showToast('Error: '+err.message); setSync('error','Delete failed'); console.error(err); }
-  deleteTarget=null;
+function confirmDelete(){
+  entries=entries.filter(e=>e.id!==deleteTarget);
+  deleteTarget=null; closeModal();
+  populateYearFilter(); renderAll();
+  showToast('Entry deleted — click 💾 Save Page to keep changes');
 }
 
-// ── WIPE ────────────────────────────────────────────────────────────────────
-async function confirmWipe(){
-  closeModal(); setSync('syncing','Wiping…');
-  try{ await jsonp({payload:JSON.stringify({action:'wipe'})}); showToast('All data wiped'); await new Promise(r=>setTimeout(r,2000)); await loadData(); }
-  catch(err){ showToast('Error: '+err.message); setSync('error','Wipe failed'); console.error(err); }
+// ── WIPE ─────────────────────────────────────────────────────────────────────
+function confirmWipe(){
+  entries=[]; closeModal();
+  populateYearFilter(); renderAll();
+  showToast('All data cleared');
 }
 
-// ── EXPORT ──────────────────────────────────────────────────────────────────
+// ── SAVE PAGE (auto-push to GitHub) ──────────────────────────────────────────
+const GH_TOKEN = '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';
+const GH_OWNER = 'atishanantkulkarni';
+const GH_REPO  = 'KhataBook';
+const GH_FILE  = 'index.html';
+const GH_API   = 'https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+GH_FILE;
+
+async function savePage(){
+  const btn = $('savePageBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Saving…';
+  setHint('Pushing to GitHub…');
+
+  try {
+    // 1. Get current file SHA (required by GitHub API to update a file)
+    const getRes = await fetch(GH_API, {
+      headers: { 'Authorization': 'token '+GH_TOKEN, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (!getRes.ok) throw new Error('Could not read file from GitHub ('+getRes.status+')');
+    const fileInfo = await getRes.json();
+    const sha = fileInfo.sha;
+
+    // 2. Build updated HTML with current entries baked in
+    const html = document.documentElement.outerHTML;
+    const jsonData = JSON.stringify(entries);
+    const updated = html.replace(
+      /<script id="dataStore" type="application\/json">[\s\S]*?<\/script>/,
+      '<script id="dataStore" type="application/json">'+jsonData+'<\/script>'
+    );
+
+    // 3. Push to GitHub
+    const encoded = btoa(unescape(encodeURIComponent(updated)));
+    const pushRes = await fetch(GH_API, {
+      method: 'PUT',
+      headers: { 'Authorization': 'token '+GH_TOKEN, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: 'KhataBook: saved '+entries.length+' entries on '+new Date().toLocaleDateString('en-IN'),
+        content: encoded,
+        sha: sha
+      })
+    });
+    if (!pushRes.ok) {
+      const err = await pushRes.json();
+      throw new Error(err.message || 'Push failed ('+pushRes.status+')');
+    }
+
+    showToast('✓ Saved to GitHub! Changes live in ~30 seconds');
+    setHint('Last saved: '+new Date().toLocaleTimeString('en-IN'));
+  } catch(err) {
+    showToast('Save failed: '+err.message);
+    setHint('Save failed — try again');
+    console.error(err);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '💾 Save Page';
+  }
+}
+
+function setHint(msg){ $('saveHint').textContent = msg; }
+
+// ── EXPORT ───────────────────────────────────────────────────────────────────
 function exportToExcel(){
   const rows=filteredEntries();
   if(rows.length===0){showToast('No data to export');return;}
@@ -480,36 +375,101 @@ function exportToExcel(){
   showToast('Exported ✓');
 }
 
-// ── TYPE TOGGLE ─────────────────────────────────────────────────────────────
-function setType(t){
-  entryType=t;
-  $('btnCredit').className='type-btn'+(t==='credit'?' active-credit':'');
-  $('btnDebit').className='type-btn'+(t==='debit'?' active-debit':'');
+// ── FILTERS ──────────────────────────────────────────────────────────────────
+function getFilters(){ return{year:$('filterYear').value,month:$('filterMonth').value,user:$('filterUser').value}; }
+function clearFilters(){ $('filterYear').value=''; $('filterMonth').value=''; $('filterUser').value=''; renderAll(); }
+
+function filteredEntries(){
+  const f=getFilters();
+  return entries.filter(e=>{
+    const [y,m]=e.date.split('-');
+    if(f.year&&y!==f.year) return false;
+    if(f.month&&parseInt(m)!==parseInt(f.month)) return false;
+    if(f.user&&e.user!==f.user) return false;
+    return true;
+  });
 }
 
-// ── EVENTS ──────────────────────────────────────────────────────────────────
-$('addBtn').addEventListener('click',addEntry);
-$('refreshBtn').addEventListener('click',loadData);
-$('exportBtn').addEventListener('click',exportToExcel);
-$('wipeBtn').addEventListener('click',()=>$('wipeModal').classList.add('show'));
-$('clearFiltersBtn').addEventListener('click',clearFilters);
-$('wipeCancelBtn').addEventListener('click',closeModal);
-$('wipeConfirmBtn').addEventListener('click',confirmWipe);
-$('deleteCancelBtn').addEventListener('click',closeModal);
-$('deleteConfirmBtn').addEventListener('click',confirmDelete);
-$('btnCredit').addEventListener('click',()=>setType('credit'));
-$('btnDebit').addEventListener('click',()=>setType('debit'));
-$('filterYear').addEventListener('change',renderAll);
-$('filterMonth').addEventListener('change',renderAll);
-$('filterUser').addEventListener('change',renderAll);
-$('entryDesc').addEventListener('keydown',e=>{if(e.key==='Enter')addEntry();});
-$('entryAmount').addEventListener('keydown',e=>{if(e.key==='Enter')addEntry();});
-$('ledgerBody').addEventListener('click',e=>{const b=e.target.closest('.del-btn');if(b)showDeleteModal(b.dataset.id);});
-document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)closeModal();}));
+function getOpeningBalance(){
+  const f=getFilters(); if(!f.year&&!f.month) return 0;
+  return entries.reduce((acc,e)=>{
+    const [y,m]=e.date.split('-'); let before=false;
+    if(f.year&&f.month) before=(y+'-'+m)<(f.year+'-'+String(f.month).padStart(2,'0'));
+    else if(f.year) before=y<f.year;
+    if(before) return acc+(e.type==='credit'?e.amount:-e.amount);
+    return acc;
+  },0);
+}
 
-// ── INIT ────────────────────────────────────────────────────────────────────
-$('entryDate').value=today();
-loadData();
+function populateYearFilter(){
+  const sel=$('filterYear'), cur=sel.value;
+  const years=[...new Set(entries.map(e=>e.date.slice(0,4)))].sort().reverse();
+  while(sel.options.length>1) sel.remove(1);
+  years.forEach(y=>{ const o=document.createElement('option'); o.value=y; o.textContent=y; sel.appendChild(o); });
+  if(cur) sel.value=cur;
+}
+
+// ── RENDER ───────────────────────────────────────────────────────────────────
+function renderAll(){ renderTable(); renderSummary(); }
+
+function renderTable(){
+  const rows=filteredEntries(), body=$('ledgerBody'), empty=$('emptyState');
+  $('entryCount').textContent=rows.length+' record'+(rows.length!==1?'s':'');
+  if(rows.length===0){ body.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display='none';
+  let running=getOpeningBalance();
+  body.innerHTML=rows.map((e,i)=>{
+    running+=e.type==='credit'?e.amount:-e.amount;
+    return '<tr>'+
+      '<td class="mono" style="color:var(--text3)">'+(i+1)+'</td>'+
+      '<td class="mono">'+fmtDate(e.date)+'</td>'+
+      '<td class="user">'+esc(e.user)+'</td>'+
+      '<td style="max-width:260px">'+esc(e.desc)+'</td>'+
+      '<td><span class="badge '+(e.type==='credit'?'badge-credit':'badge-debit')+'">'+e.type+'</span></td>'+
+      '<td class="amount '+e.type+'">'+(e.type==='credit'?'+':'-')+' '+fmt(e.amount)+'</td>'+
+      '<td style="text-align:right;font-family:\'DM Mono\',monospace;font-size:12px;color:'+(running>=0?'var(--text2)':'var(--debit)')+'">'+fmt(running)+'</td>'+
+      '<td><button class="del-btn" data-id="'+e.id+'" title="Delete">✕</button></td>'+
+      '</tr>';
+  }).join('');
+}
+
+function renderSummary(){
+  const rows=filteredEntries(), opening=getOpeningBalance();
+  const credits=rows.filter(e=>e.type==='credit').reduce((s,e)=>s+e.amount,0);
+  const debits=rows.filter(e=>e.type==='debit').reduce((s,e)=>s+e.amount,0);
+  const f=getFilters();
+  const label=f.month&&f.year?MONTHS[parseInt(f.month)]+' '+f.year:f.year?f.year:f.month?MONTHS[parseInt(f.month)]:'All Time';
+  $('summaryOpening').textContent=fmt(opening);
+  $('summaryOpeningNote').textContent='Before '+label;
+  $('summaryCredits').textContent=fmt(credits);
+  $('creditCount').textContent=rows.filter(e=>e.type==='credit').length+' credit entries';
+  $('summaryDebits').textContent=fmt(debits);
+  $('debitCount').textContent=rows.filter(e=>e.type==='debit').length+' debit entries';
+  $('summaryClosing').textContent=fmt(opening+credits-debits);
+  $('summaryClosingNote').textContent='End of '+label;
+}
+
+// ── EVENTS ───────────────────────────────────────────────────────────────────
+$('addBtn').addEventListener('click', addEntry);
+$('savePageBtn').addEventListener('click', savePage);
+$('exportBtn').addEventListener('click', exportToExcel);
+
+$('wipeBtn').addEventListener('click', ()=>$('wipeModal').classList.add('show'));
+$('clearFiltersBtn').addEventListener('click', clearFilters);
+$('wipeCancelBtn').addEventListener('click', closeModal);
+$('wipeConfirmBtn').addEventListener('click', confirmWipe);
+$('deleteCancelBtn').addEventListener('click', closeModal);
+$('deleteConfirmBtn').addEventListener('click', confirmDelete);
+
+$('btnCredit').addEventListener('click', ()=>setType('credit'));
+$('btnDebit').addEventListener('click', ()=>setType('debit'));
+$('filterYear').addEventListener('change', renderAll);
+$('filterMonth').addEventListener('change', renderAll);
+$('filterUser').addEventListener('change', renderAll);
+$('entryDesc').addEventListener('keydown', e=>{ if(e.key==='Enter') addEntry(); });
+$('entryAmount').addEventListener('keydown', e=>{ if(e.key==='Enter') addEntry(); });
+$('ledgerBody').addEventListener('click', e=>{ const b=e.target.closest('.del-btn'); if(b) showDeleteModal(Number(b.dataset.id)); });
+document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',e=>{ if(e.target===m) closeModal(); }));
 </script>
 </body>
 </html>
