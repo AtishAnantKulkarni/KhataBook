@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Khata Book — Family Expense Tracker</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;family=DM+Mono:wght@400;500&amp;family=DM+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
 <style>
   :root{--bg:#0f0f13;--surface:#17171f;--surface2:#1e1e2a;--surface3:#252534;--border:#2e2e40;--accent:#c8a96e;--accent2:#e8c98e;--credit:#4eca8b;--debit:#e8625a;--text:#e8e8f0;--text2:#9898b0;--text3:#606078;--r:10px}
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -97,22 +95,22 @@
 <header>
   <div class="logo-row">
     <div class="logo">Khata Book <span>Family Expense Tracker</span></div>
-    <div class="save-hint" id="saveHint">Click ⚙️ to set up auto-save, then 💾 Save after adding entries</div>
+    <div class="save-hint" id="saveHint">Building file…</div>
   </div>
   <div class="header-actions">
-    <button class="btn btn-ghost" id="settingsBtn">⚙️ Setup</button>
-    <button class="btn btn-save" id="savePageBtn">💾 Save</button>
-    <button class="btn btn-export" id="exportBtn">⬇ Export</button>
-    <button class="btn btn-danger" id="wipeBtn">↺ Wipe All</button>
+    <button class="btn btn-ghost" id="settingsBtn" fdprocessedid="fr2gid">⚙️ Setup</button>
+    <button class="btn btn-save" id="savePageBtn" fdprocessedid="48ol7" disabled="">⏳ Saving…</button>
+    <button class="btn btn-export" id="exportBtn" fdprocessedid="gb7g5n">⬇ Export</button>
+    <button class="btn btn-danger" id="wipeBtn" fdprocessedid="a4pvn">↺ Wipe All</button>
   </div>
 </header>
 
 <main>
   <div class="filters-bar">
     <div class="filter-group"><label>Year</label>
-      <select id="filterYear"><option value="">All Years</option></select></div>
+      <select id="filterYear" fdprocessedid="803tx"><option value="">All Years</option><option value="2026">2026</option></select></div>
     <div class="filter-group"><label>Month</label>
-      <select id="filterMonth">
+      <select id="filterMonth" fdprocessedid="ecth3">
         <option value="">All Months</option>
         <option value="1">January</option><option value="2">February</option><option value="3">March</option>
         <option value="4">April</option><option value="5">May</option><option value="6">June</option>
@@ -120,19 +118,19 @@
         <option value="10">October</option><option value="11">November</option><option value="12">December</option>
       </select></div>
     <div class="filter-group"><label>User</label>
-      <select id="filterUser">
+      <select id="filterUser" fdprocessedid="ban0nl">
         <option value="">All Users</option>
         <option value="Atish">Atish</option><option value="Aniket">Aniket</option>
         <option value="Harshada">Harshada</option><option value="Shubhada">Shubhada</option>
       </select></div>
-    <button class="btn btn-ghost" id="clearFiltersBtn">✕ Clear</button>
+    <button class="btn btn-ghost" id="clearFiltersBtn" fdprocessedid="viju">✕ Clear</button>
   </div>
 
   <div class="summary-grid">
-    <div class="summary-card opening"><div class="lbl">Opening Balance</div><div class="val" id="summaryOpening">₹ 0.00</div><div class="sub" id="summaryOpeningNote">Start of period</div></div>
-    <div class="summary-card credits"><div class="lbl">Total Credits</div><div class="val" id="summaryCredits">₹ 0.00</div><div class="sub" id="creditCount">0 entries</div></div>
-    <div class="summary-card debits"><div class="lbl">Total Debits</div><div class="val" id="summaryDebits">₹ 0.00</div><div class="sub" id="debitCount">0 entries</div></div>
-    <div class="summary-card closing"><div class="lbl">Closing Balance</div><div class="val" id="summaryClosing">₹ 0.00</div><div class="sub" id="summaryClosingNote">End of period</div></div>
+    <div class="summary-card opening"><div class="lbl">Opening Balance</div><div class="val" id="summaryOpening">₹ 0.00</div><div class="sub" id="summaryOpeningNote">Before All Time</div></div>
+    <div class="summary-card credits"><div class="lbl">Total Credits</div><div class="val" id="summaryCredits">₹ 1,000.00</div><div class="sub" id="creditCount">1 credit entries</div></div>
+    <div class="summary-card debits"><div class="lbl">Total Debits</div><div class="val" id="summaryDebits">₹ 0.00</div><div class="sub" id="debitCount">0 debit entries</div></div>
+    <div class="summary-card closing"><div class="lbl">Closing Balance</div><div class="val" id="summaryClosing">₹ 1,000.00</div><div class="sub" id="summaryClosingNote">End of All Time</div></div>
   </div>
 
   <div class="add-panel">
@@ -140,26 +138,26 @@
     <div class="add-form">
       <div class="form-group"><label>Date</label><input type="date" id="entryDate" style="min-width:150px"></div>
       <div class="form-group"><label>User</label>
-        <select id="entryUser" style="min-width:130px">
+        <select id="entryUser" style="min-width:130px" fdprocessedid="skgv35">
           <option value="">Select User</option>
           <option value="Atish">Atish</option><option value="Aniket">Aniket</option>
           <option value="Harshada">Harshada</option><option value="Shubhada">Shubhada</option>
         </select></div>
       <div class="form-group"><label>Type</label>
         <div class="type-toggle">
-          <button class="type-btn active-credit" id="btnCredit">Credit</button>
-          <button class="type-btn" id="btnDebit">Debit</button>
+          <button class="type-btn active-credit" id="btnCredit" fdprocessedid="4087qg">Credit</button>
+          <button class="type-btn" id="btnDebit" fdprocessedid="w1zmng">Debit</button>
         </div></div>
-      <div class="form-group"><label>Amount (₹)</label><input type="number" id="entryAmount" placeholder="0.00" min="0" step="0.01" style="min-width:130px"></div>
-      <div class="form-group" style="flex:1;min-width:200px"><label>Description</label><input type="text" id="entryDesc" placeholder="e.g. Groceries, Salary…" style="width:100%"></div>
-      <button class="btn btn-primary" id="addBtn" style="align-self:flex-end;padding:9px 22px">Add Entry</button>
+      <div class="form-group"><label>Amount (₹)</label><input type="number" id="entryAmount" placeholder="0.00" min="0" step="0.01" style="min-width:130px" fdprocessedid="28mi1u"></div>
+      <div class="form-group" style="flex:1;min-width:200px"><label>Description</label><input type="text" id="entryDesc" placeholder="e.g. Groceries, Salary…" style="width:100%" fdprocessedid="03quvl"></div>
+      <button class="btn btn-primary" id="addBtn" style="align-self:flex-end;padding:9px 22px" fdprocessedid="oayn0i">Add Entry</button>
     </div>
   </div>
 
   <div class="table-wrap">
     <div class="table-header">
       <h3>📋 Transactions</h3>
-      <span class="entry-count" id="entryCount">0 records</span>
+      <span class="entry-count" id="entryCount">1 record</span>
     </div>
     <div style="overflow-x:auto">
       <table>
@@ -167,10 +165,10 @@
           <th>#</th><th>Date</th><th>User</th><th>Description</th><th>Type</th>
           <th style="text-align:right">Amount</th><th style="text-align:right">Balance</th><th></th>
         </tr></thead>
-        <tbody id="ledgerBody"></tbody>
+        <tbody id="ledgerBody"><tr><td class="mono" style="color:var(--text3)">1</td><td class="mono">06 Jun 2026</td><td class="user">Atish</td><td style="max-width:260px">Salary</td><td><span class="badge badge-credit">credit</span></td><td class="amount credit">+ ₹ 1,000.00</td><td style="text-align:right;font-family:'DM Mono',monospace;font-size:12px;color:var(--text2)">₹ 1,000.00</td><td><button class="del-btn" data-id="1780754585468" title="Delete" fdprocessedid="gqrzpg">✕</button></td></tr></tbody>
       </table>
     </div>
-    <div id="emptyState" class="empty-state"><div class="icon">📒</div><p>No entries yet. Add your first transaction above.</p></div>
+    <div id="emptyState" class="empty-state" style="display: none;"><div class="icon">📒</div><p>No entries yet. Add your first transaction above.</p></div>
   </div>
 </main>
 
@@ -231,9 +229,9 @@
   </div>
 </div>
 
-<div id="toast"></div>
+<div id="toast" class="">Entry added ✓ — click 💾 Save to push to GitHub</div>
 
-<script id="dataStore" type="application/json">[]</script>
+<script id="dataStore" type="application/json">[{"id":1780754585468,"date":"2026-06-06","user":"Atish","type":"credit","amount":1000,"desc":"Salary","createdAt":1780754585468}]</script>
 
 <script>
 const MONTHS=['','January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -527,5 +525,6 @@ $('entryAmount').addEventListener('keydown',e=>{if(e.key==='Enter')addEntry();})
 $('ledgerBody').addEventListener('click',e=>{const b=e.target.closest('.del-btn');if(b)showDeleteModal(Number(b.dataset.id));});
 document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)closeModal();}));
 </script>
-</body>
-</html>
+
+
+<span id="PING_IFRAME_FORM_DETECTION" style="display: none;"></span></body></html>
