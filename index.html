@@ -300,14 +300,22 @@ async function loadData(){
       }))
       .sort((a,b)=>a.date.localeCompare(b.date)||Number(a.createdAt)-Number(b.createdAt));
     $('loadingState').style.display='none';
+    $('errorState').style.display='none';
     setSync('online','Synced · '+entries.length+' entr'+(entries.length===1?'y':'ies'));
     populateYearFilter();
     renderAll();
   } catch(err){
     $('loadingState').style.display='none';
-    $('errorState').style.display='block';
-    $('errorMsg').textContent='Error: '+err.message;
-    setSync('error','Failed to load');
+    // If we already have data, keep showing it and just warn in the status bar
+    if(entries.length>0){
+      setSync('error','Refresh failed — showing cached data');
+      showToast('Could not refresh — tap ⟳ to retry');
+      renderAll(); // re-render existing data
+    } else {
+      $('errorState').style.display='block';
+      $('errorMsg').textContent='Error: '+err.message;
+      setSync('error','Failed to load');
+    }
     console.error(err);
   }
 }
@@ -404,6 +412,7 @@ async function addEntry(){
     await jsonp({payload:JSON.stringify({action:'add',id:Date.now().toString(),date,user,type:entryType,amount,desc,createdAt:Date.now()})});
     $('entryAmount').value=''; $('entryDesc').value=''; $('entryDate').value=today();
     showToast('Entry saved ✓');
+    await new Promise(r=>setTimeout(r,2000));
     await loadData();
   } catch(err){ showToast('Error: '+err.message); setSync('error','Save failed'); console.error(err); }
   finally{ btn.disabled=false; btn.textContent='Add Entry'; }
@@ -419,7 +428,7 @@ function showDeleteModal(id){
 
 async function confirmDelete(){
   closeModal(); setSync('syncing','Deleting…');
-  try{ await jsonp({payload:JSON.stringify({action:'delete',id:deleteTarget})}); showToast('Entry deleted'); await loadData(); }
+  try{ await jsonp({payload:JSON.stringify({action:'delete',id:deleteTarget})}); showToast('Entry deleted'); await new Promise(r=>setTimeout(r,2000)); await loadData(); }
   catch(err){ showToast('Error: '+err.message); setSync('error','Delete failed'); console.error(err); }
   deleteTarget=null;
 }
@@ -427,7 +436,7 @@ async function confirmDelete(){
 // ── WIPE ────────────────────────────────────────────────────────────────────
 async function confirmWipe(){
   closeModal(); setSync('syncing','Wiping…');
-  try{ await jsonp({payload:JSON.stringify({action:'wipe'})}); showToast('All data wiped'); await loadData(); }
+  try{ await jsonp({payload:JSON.stringify({action:'wipe'})}); showToast('All data wiped'); await new Promise(r=>setTimeout(r,2000)); await loadData(); }
   catch(err){ showToast('Error: '+err.message); setSync('error','Wipe failed'); console.error(err); }
 }
 
